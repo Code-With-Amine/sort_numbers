@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        img{
+            width: 100px;
+            height: 100px;
+        }
+        body{
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+    </style>
+</head>
+<body>
+    <script>
+        
+    function getDataImage(){
+
+        let t = []
+        for(let i = 1 ; i <= 9; i++){
+            t.push(`img${i}.jpeg`)
+        }
+        // melanger les elements stockes dans le tableau
+        for(let i in t){
+            let temp = t[i]
+            let randIndex = Math.floor(Math.random() * t.length);
+            t[i] = t[randIndex]
+            t[randIndex] = temp
+        }
+        
+        //copied le tobleau T dans un tableau a 20 de 3 lignes et 3 colonnes
+        let index = 0
+        let t2d = []
+        for(let i = 0 ; i < 3; i++){
+            t2d[i] = [] // in each row create an empty array
+            for(let j = 0 ; j <3 ; j++){
+                t2d[i][j] = t[index]
+                index++
+            }
+        }
+
+        // delete the 9 value
+        for(let i in t2d){
+            for(let j in t2d){
+                if(t2d[i][j] == 'img9.jpeg'){
+                    t2d[i][j] = ''
+                    return t2d
+                }
+            }
+        }
+    }
+
+// 2- function create
+function create(){
+    let table = document.createElement('table')
+    document.body.append(table)
+    let twoDemoArray = getDataImage()
+        for(let array of twoDemoArray){
+            let row = document.createElement('tr')
+            table.append(row)
+            for(let imgSrc of array){
+                let td = document.createElement('td')
+                td.innerHTML = `<img src=images/${imgSrc}>`
+                row.append(td)
+
+            }
+        }
+}
+
+create()
+// 3- 
+document.querySelectorAll('td').forEach( (td) =>{
+        td.addEventListener('click',()=>{
+                let adjacent = td.previousElementSibling
+                let srcOfAdjacentEl = adjacent.querySelector('img');
+                if(srcOfAdjacentEl.outerHTML == '<img src="images/">' ){
+                    let temp = td.innerHTML
+                    td.innerHTML = srcOfAdjacentEl.outerHTML
+                    srcOfAdjacentEl.outerHTML = temp
+                }else{
+                    return
+                }
+});
+})
+// 4- 
+function End(){
+        let allImages = document.querySelectorAll('table img')
+        let over = false
+        let CkechSources = []
+        for(let i = 1 ; i <= 8 ; i++){
+                CkechSources.push(`img${i}.png`)
+        }
+
+        for(let i = 1 ; i <= 8 ; i++){
+            if(CkechSources[i] == allImages[i].src){
+                over = true
+            }else{
+                over = false
+                break;
+            }
+        }
+
+        if(over == true){
+            return 'a Partie Terminee'
+        }
+}
+    </script>
+</body>
+</html>

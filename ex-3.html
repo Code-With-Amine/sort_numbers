@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="https://code.jquery.com/jquery-3.7.0.slim.min.js" integrity="sha256-tG5mcZUtJsZvyKAxYLVXrmjKBVLd6VpVccqz/r4ypFE=" crossorigin="anonymous"></script>
+    <title>Document</title>
+    <style>
+        .warning{
+            border-color: green;
+            background-color: yellow;
+        }
+    </style>
+</head>
+<body>
+
+    <input type="text" id="N1" class="warning" name="" id="">
+    <input type="text" id="N2" class="warning" name="" id="">
+    <button>button-1</button>
+    <button>button-2</button>
+
+
+    <script>
+function active(){
+    $('button').prop('disabled', false)
+}
+
+function deactivate(){
+    $('button').prop('disabled', true)
+}
+
+deactivate()
+
+$('input').on('blur', function() {
+    if ($('input:eq(0)').val() !== '' && $('input:eq(1)').val() !== '') {
+        active();
+    } else {
+        deactivate();
+    }
+});
+
+
+    </script>
+    
+</body>
+</html>

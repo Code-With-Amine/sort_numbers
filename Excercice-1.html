@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<style>
+    .cercle{
+        width: 80px;
+        height: 80px;
+        border-radius: 50%;
+        display: inline-block;
+        background-color: blueviolet;
+    }
+
+</style>
+<body>
+    <input type="number">
+    <button onclick="showShap()">Submit</button>
+    <div id="container">
+
+    </div>
+
+    <script>
+        function showShap(){
+            let n = Number(document.querySelector('input').value)// the value of the user input
+            let div = document.querySelector('#container') // retrive the container div
+            for(let i = 0 ; i < n ; i++){ // loop throw the user spicfied rows
+                let marginLeft = 0; 
+                let newDiv = document.createElement('div') // we are creating new div for each new row
+                    for(let s = 0 ; s < i; s++){
+                        marginLeft += 80
+                        newDiv.style.marginLeft = `${marginLeft}px` 
+                    }
+                    for(let c = (i*2)+1 ; c <= ((2*n)-1); c++){
+                        newDiv.innerHTML += '<span class="cercle"></span>'
+                    }
+                    div.append(newDiv);
+
+            }
+        }
+    </script>
+</body>
+</html>
